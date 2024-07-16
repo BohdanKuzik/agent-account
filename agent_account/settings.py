@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'catalog',
     'crispy_forms',
     'crispy_bootstrap4',
+    'faker',
 ]
 
 MIDDLEWARE = [

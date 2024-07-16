@@ -18,7 +18,14 @@ class Player(models.Model):
 
 
 class Agent(AbstractUser):
-    players = models.ManyToManyField(Player, related_name="agents")
+    players = models.ForeignKey(
+        Player,
+        on_delete=models.CASCADE,
+        related_name="agents",
+        null=True,
+        blank=True
+    )
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
