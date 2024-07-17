@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Agent Home</h1>
+  <p>Welcome to the Web-site for agents!</p>
+  <h2>Dynamic content</h2>
+  <p>This site have following record counts:</p>
+  <ul>
+    <li><strong>Agents:</strong> {{ num_agents }}</li>
+    <li><strong>Clubs:</strong> {{ num_clubs }}</li>
+    <li><strong>Transfers:</strong> {{ num_transfers }}</li>
+    <li><strong>Players:</strong> {{ num_players }}</li>
+  </ul>
+
+  <p>You have visited this page
+      {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+
+{% endblock %}
