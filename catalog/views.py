@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.views import generic
 
 from catalog.models import Agent, Club, Player, Transfer
 
@@ -25,3 +27,26 @@ def index(request):
     }
 
     return render(request, "catalog/index.html", context=context)
+
+
+class ClubListView(LoginRequiredMixin, generic.ListView):
+    model = Club
+    context_object_name = "club_list"
+    template_name = "catalog/club_list.html"
+    paginate_by = 10
+
+
+class TransferListView(LoginRequiredMixin, generic.ListView):
+    model = Transfer
+    paginate_by = 5
+    queryset = Transfer.objects.all().select_related("club")
+
+
+class AgentListView(LoginRequiredMixin, generic.ListView):
+    model = Agent
+    paginate_by = 5
+
+
+class PlayerListView(LoginRequiredMixin, generic.ListView):
+    model = Player
+    paginate_by = 15

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Agent List
+{#    <a href="{% url 'taxi:driver-create' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+  </h1>
+
+  {% if agent_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+      {% for agent in agent_list %}
+        <tr>
+          <td>{{ agent.id }}</td>
+          <td><a href="{{ agent.get_absolute_url }}">{{ agent.username }} {% if user == agent %} (Me){% endif %}</a>
+          </td>
+          <td>{{ agent.first_name }}</td>
+          <td>{{ agent.last_name }}</td>
+          <td>{{ agent.license_number }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+  {% else %}
+    <p>There are no agents in the data.</p>
+  {% endif %}
+{% endblock %}

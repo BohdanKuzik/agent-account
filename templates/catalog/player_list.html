@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Player list
+{#    <a href="{% url 'taxi:car-create' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+  </h1>
+  {% if player_list %}
+    <ul>
+      {% for player in player_list %}
+        <li>
+          <a href="#">{{ player.id }}</a>
+          {{ player.last_name }} {{ player.first_name }} ({{ player.age }}) {{ player.country }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no players in data</p>
+  {% endif %}
+{% endblock %}
