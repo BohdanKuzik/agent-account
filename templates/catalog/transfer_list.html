@@ -11,7 +11,7 @@
     <ul>
       {% for transfer in transfer_list %}
         <li>
-          <a href="#">{{ transfer.id }}</a>
+          <a href="{% url 'catalog:transfer-detail' pk=transfer.id%}">{{ transfer.id }}</a>
           {{ transfer.transfer_date }} ({{ transfer.transaction_amount }})
         </li>
       {% endfor %}

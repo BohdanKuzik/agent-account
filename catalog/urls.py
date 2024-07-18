@@ -1,6 +1,6 @@
 from django.urls import path
 
-from catalog.views import index, ClubListView, PlayerListView, AgentListView, TransferListView
+from catalog.views import index, ClubListView, PlayerListView, AgentListView, TransferListView, TransferDetailView
 
 urlpatterns = [
     path("", index, name="index"),
@@ -23,6 +23,11 @@ urlpatterns = [
         "players/",
         PlayerListView.as_view(),
         name="player-list",
+    ),
+    path(
+        "transfer/<int:pk>/",
+        TransferDetailView.as_view(),
+        name="transfer-detail",
     ),
 ]
 

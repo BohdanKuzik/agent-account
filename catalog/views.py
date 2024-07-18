@@ -42,6 +42,10 @@ class TransferListView(LoginRequiredMixin, generic.ListView):
     queryset = Transfer.objects.all().select_related("club")
 
 
+class TransferDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Transfer
+
+
 class AgentListView(LoginRequiredMixin, generic.ListView):
     model = Agent
     paginate_by = 5
