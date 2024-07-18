@@ -1,40 +1,37 @@
 <nav class="pcoded-navbar">
   <div class="navbar-wrapper">
-    <div class="navbar-brand header-logo">
-      <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+    <div class="navbar-brand header-logo"><img style="padding-right: 10px" src="/static/assets/images/divi.svg" alt="">
+      <b>Account agent</b>
+      <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
     </div>
     <div class="navbar-content scroll-div">
       <ul class="nav pcoded-inner-navbar">
         <li class="nav-item pcoded-menu-caption">
           <label>Navigation</label>
         </li>
+
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
             class="nav-item {% if 'index' in segment %}active{% endif %}">
-          {% if request.user.is_superuser %}
-            <a href="{% url 'admin:index' %}" class="nav-link ">
-          {% else %}
-            <a href="{% url 'index' %}" class="nav-link ">
-          {% endif %}
-          <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span>
+          <a href="{% url 'catalog:index' %}" class="nav-link ">
+            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span
+              class="pcoded-mtext">What we have</span>
           </a>
         </li>
+
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
-            class="nav-item {% if 'index' in segment %}active{% endif %}">
-          {% if request.user.is_superuser %}
-            <a href="{% url 'admin:index' %}" class="nav-link ">
-          {% else %}
-            <a href="{% url 'index' %}" class="nav-link ">
-          {% endif %}
-          <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span>
+            class="nav-item {% if 'catalog:index' in segment %}active{% endif %}">
+          <a href="{% url 'catalog:agent-list' %}" class="nav-link ">
+            <span class="pcoded-micon"><i class="feather icon-briefcase"></i></span><span class="pcoded-mtext">Our agents</span>
           </a>
         </li>
+
         <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
           <a href="#" class="nav-link "><span class="pcoded-micon"><i
-              class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Dynamic Tables</span></a>
+              class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Players base</span></a>
         </li>
         <li class="nav-item">
           <a target="_blank" href="/api/product/" class="nav-link "><span class="pcoded-micon"><i
-              class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Generated API</span></a>
+              class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Our Transfers</span></a>
         </li>
 
         {% if not request.user.is_authenticated %}
@@ -92,18 +89,9 @@
             </ul>
           </li>
           <li data-username="Profile Page" class="nav-item {% if 'profile' in segment %}active{% endif %}"><a
-              href="#" class="nav-link"><span
+              href="{% url 'catalog:profile' %}" class="nav-link"><span
               class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Profile
               Page</span></a>
-          </li>
-          <li data-username="Sample Page" class="nav-item {% if 'sample_page' in segment %}active{% endif %}"><a
-              href="#" class="nav-link"><span
-              class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample
-              page</span></a>
-          </li>
-          <li data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"><span
-              class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled
-              menu</span></a>
           </li>
         {% endif %}
       </ul>
