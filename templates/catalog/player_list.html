@@ -11,7 +11,7 @@
     <ul>
       {% for player in player_list %}
         <li>
-          <a href="#">{{ player.id }}</a>
+          <a href="{% url 'catalog:player-detail' pk=player.id%}">{{ player.id }}</a>
           {{ player.last_name }} {{ player.first_name }} ({{ player.age }}) {{ player.country }}
         </li>
       {% endfor %}

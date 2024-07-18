@@ -51,6 +51,23 @@ class AgentListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
+class AgentDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Agent
+    template_name = 'catalog/agent_detail.html'
+    context_object_name = 'agent'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        agent = self.get_object()
+        transfers = Transfer.objects.filter(agents=agent)
+        context['transfers'] = transfers
+        return context
+
+
 class PlayerListView(LoginRequiredMixin, generic.ListView):
     model = Player
     paginate_by = 15
+
+
+class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Player

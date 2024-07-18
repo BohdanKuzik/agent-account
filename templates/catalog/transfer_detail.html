@@ -6,15 +6,7 @@
   </h1><br>
   <p><strong>Clubs</strong>: {{ transfer.club.club_name }}</p><br>
   <h3>Agents
-{#    {% if transfer in user.transfers.all %}#}
-{#      <a href="{% url 'taxi:toggle-car-assign' pk=car.id %}" class="btn btn-danger link-to-page">#}
-{#        Delete me from this car#}
-{#      </a>#}
-{#    {% else %}#}
-{#      <a href="{% url 'taxi:toggle-car-assign' pk=car.id %}" class="btn btn-success link-to-page">#}
-{#        Assign me from this car#}
-{#      </a>#}
-{#    {% endif %}#}
+
   </h3>
   <hr>
   <ul>
@@ -24,10 +16,5 @@
       <li><strong>Players</strong>: {{ agent.players }}</li><br>
     {% endfor %}
   </ul>
-{#  <a style="float: left" href="{% url 'taxi:car-update' pk=car.id %}" class="btn btn-secondary link-to-page">#}
-{#    Update#}
-{#  </a>#}
-{#  <a style="float: left" href="{% url 'taxi:car-delete' pk=car.id %}" class="btn btn-danger link-to-page">#}
-{#    Delete#}
-{#  </a>#}
+
 {% endblock %}

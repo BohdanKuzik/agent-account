@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h1>{{ agent.username }}'s Transfers</h1>
+
+  <h2>Agent Details</h2>
+  <p>First Name: {{ agent.first_name }}</p>
+  <p>Last Name: {{ agent.last_name }}</p>
+  <p>Username: {{ agent.username }}</p>
+
+  <h2>Transfers</h2>
+  {% if transfers %}
+    <ul>
+      {% for transfer in transfers %}
+        <li>
+          Transfer Date: {{ transfer.transfer_date }}<br>
+          Club: {{ transfer.club.club_name }}<br>
+          Transaction Amount: {{ transfer.transaction_amount }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No transfers found for this agent.</p>
+  {% endif %}
+{% endblock %}

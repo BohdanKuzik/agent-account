@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+  {% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h1>
+    Full name: {{ player.first_name }} {{ player.last_name }}
+
+  </h1>
+
+  <p><strong>First name:</strong> {{ player.first_name }}</p>
+  <p><strong>Last name:</strong> {{ player.last_name }}</p>
+  <p><strong>Age:</strong> {{ player.age }}</p>
+  <p><strong>Country:</strong> {{ player.country }}</p>
+  <p><strong>Position:</strong> {{ player.position }}</p>
+ 
+{% endblock %}
