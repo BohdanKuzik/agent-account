@@ -1,9 +1,15 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 
-from catalog.models import Agent, Club, Player, Transfer
+from catalog.models import (
+    Agent,
+    Club,
+    Player,
+    Transfer,
+)
 
 
 @login_required
@@ -71,5 +77,3 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
 
 class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Player
-
-

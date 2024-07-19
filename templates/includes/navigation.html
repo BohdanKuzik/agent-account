@@ -28,7 +28,7 @@
               <div class="pro-head">
                 <img src="{% static 'assets/images/user/avatar-2.jpg' %}" class="img-radius" alt="User-Profile-Image">
                 <span>{{ request.user.username }}</span>
-                <a href="{% url 'logout' %}" class="dud-logout" title="Logout">
+                <a href="{% url 'accounts:logout' %}" class="dud-logout" title="Logout">
                   <i class="feather icon-log-out" style="float: right"></i>
                 </a>
               </div>
@@ -42,7 +42,7 @@
               <div class="pro-head">
                 <img src="{% static 'assets/images/user/avatar-2.jpg' %}" class="img-radius" alt="User-Profile-Image">
                 <span>Guest</span>
-                <a href="{% url 'login' %}" class="dud-logout" title="Login">
+                <a href="{% url 'accounts:login' %}" class="dud-logout" title="Login">
                   <i class="feather icon-log-in" style="float: right"></i>
                 </a>
               </div>

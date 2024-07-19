@@ -73,11 +73,11 @@
           </a>
           {% if request.user.is_authenticated %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'login' %}" class="" target="_self">Log out</a></li>
+              <li class=""><a href="{% url 'accounts:logout' %}" class="" target="_self">Log out</a></li>
             </ul>
           {% else %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'logout'%}" class="" target="_self">Log in</a></li>
+              <li class=""><a href="{% url 'accounts:login' %}" class="" target="_self">Log in</a></li>
             </ul>
           {% endif %}
         </li>

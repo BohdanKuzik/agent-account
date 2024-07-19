@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from catalog.views import (
     index,
@@ -8,7 +8,7 @@ from catalog.views import (
     TransferListView,
     TransferDetailView,
     PlayerDetailView,
-    AgentDetailView
+    AgentDetailView,
 )
 
 urlpatterns = [
