@@ -30,6 +30,7 @@ class Agent(AbstractUser):
         verbose_name = "agent"
         verbose_name_plural = "agents"
 
+
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
 

@@ -59,8 +59,8 @@ class AgentDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         agent = self.get_object()
-        transfers = Transfer.objects.filter(agents=agent)
-        context['transfers'] = transfers
+        context['transfers'] = Transfer.objects.filter(agents=agent)
+        context['players'] = agent.players.all()
         return context
 
 
