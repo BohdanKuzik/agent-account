@@ -1,15 +1,38 @@
-  {% extends "base.html" %}
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
 
 {% block content %}
-  <h1>
-    Full name: {{ player.first_name }} {{ player.last_name }}
+  <div class="container mt-0">
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="mb-0">
+          Full Name: {{ player.first_name }} {{ player.last_name }}
+        </h2>
+      </div>
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col-sm-3">First Name:</dt>
+          <dd class="col-sm-9">{{ player.first_name }}</dd>
 
-  </h1>
+          <dt class="col-sm-3">Last Name:</dt>
+          <dd class="col-sm-9">{{ player.last_name }}</dd>
 
-  <p><strong>First name:</strong> {{ player.first_name }}</p>
-  <p><strong>Last name:</strong> {{ player.last_name }}</p>
-  <p><strong>Age:</strong> {{ player.age }}</p>
-  <p><strong>Country:</strong> {{ player.country }}</p>
-  <p><strong>Position:</strong> {{ player.position }}</p>
- 
+          <dt class="col-sm-3">Age:</dt>
+          <dd class="col-sm-9">{{ player.age }}</dd>
+
+          <dt class="col-sm-3">Country:</dt>
+          <dd class="col-sm-9">{{ player.country }}</dd>
+
+          <dt class="col-sm-3">Position:</dt>
+          <dd class="col-sm-9">{{ player.position }}</dd>
+        </dl>
+      </div>
+      <div class="card-footer text-muted">
+        <a href="{% url 'catalog:player-list' %}" class="btn btn-secondary">Back to List</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}
