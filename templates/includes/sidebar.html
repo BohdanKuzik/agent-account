@@ -29,22 +29,11 @@
           <a href="{% url 'catalog:player-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Players Base</span></a>
         </li>
-      <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
           <a href="{% url 'catalog:transfer-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Our Transfers</span></a>
         </li>
-        {% if not request.user.is_authenticated %}
-          <li
-              data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
-              class="nav-item pcoded-hasmenu">
-            <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
-                class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
-            <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'login' %}" class="">Sign IN</a></li>
-              <li class=""><a href="{% url 'login' %}" class="">Sign UP</a></li>
-            </ul>
-          </li>
-        {% endif %}
+
 
         {% if app_list %}
           {% for app in app_list %}
@@ -75,20 +64,23 @@
             {% endif %}
           {% endfor %}
         {% endif %}
-
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-          <li
-              data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
-              class="nav-item pcoded-hasmenu">
-            <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
-                class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+        <li
+            data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
+            class="nav-item pcoded-hasmenu">
+          <a href="javascript:" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-lock"></i></span>
+            <span class="pcoded-mtext">Authentication</span>
+          </a>
+          {% if request.user.is_authenticated %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="#" class="" target="_blank">Sign up</a></li>
-              <li class=""><a href="" class="" target="_blank">Log out</a></li>
+              <li class=""><a href="{% url 'login' %}" class="" target="_self">Log out</a></li>
             </ul>
-          </li>
-          
-        {% endif %}
+          {% else %}
+            <ul class="pcoded-submenu">
+              <li class=""><a href="{% url 'logout'%}" class="" target="_self">Log in</a></li>
+            </ul>
+          {% endif %}
+        </li>
       </ul>
     </div>
   </div>

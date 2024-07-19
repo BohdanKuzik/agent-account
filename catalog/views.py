@@ -71,3 +71,5 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
 
 class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Player
+
+
