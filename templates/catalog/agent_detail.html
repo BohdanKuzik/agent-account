@@ -1,25 +1,52 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
 
 {% block content %}
-  <h1>{{ agent.username }}'s Transfers</h1>
+  <div class="container mt-n40">
 
-  <h2>Agent Details</h2>
-  <p>First Name: {{ agent.first_name }}</p>
-  <p>Last Name: {{ agent.last_name }}</p>
-  <p>Username: {{ agent.username }}</p>
+    <h1 class="mb-4">
+      <img class="rounded-circle" style="width:40px;"
+           src="{% static 'assets/images/user/avatar-2.jpg' %}"
+           alt="activity-user">&nbsp&nbsp{{ agent.username }}'s Transfers</h1>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3 class="card-title">Agent Details</h3>
+      </div>
+      <div class="card-body">
+        <div class="list-group-item" style="background-color: #1d2529">
+          <strong>Transfer Date:</strong> {{ transfer.transfer_date }}<br>
+          <strong>Club:</strong> {{ transfer.club.club_name }}<br>
+          <strong>Transaction Amount:</strong> {{ transfer.transaction_amount }}
+        </div>
+      </div>
+    </div>
 
-  <h2>Transfers</h2>
-  {% if transfers %}
-    <ul>
-      {% for transfer in transfers %}
-        <li>
-          Transfer Date: {{ transfer.transfer_date }}<br>
-          Club: {{ transfer.club.club_name }}<br>
-          Transaction Amount: {{ transfer.transaction_amount }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No transfers found for this agent.</p>
-  {% endif %}
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Transfers</h3>
+      </div>
+      <div class="card-body">
+        {% if transfers %}
+          <ul class="list-group">
+            {% for transfer in transfers %}
+              <li class="list-group-item" style="background-color: #1d2529">
+                <strong>Transfer Date:</strong> {{ transfer.transfer_date }}<br>
+                <strong>Club:</strong> {{ transfer.club.club_name }}<br>
+                <strong>Transaction Amount:</strong> {{ transfer.transaction_amount }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No transfers found for this agent.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}
