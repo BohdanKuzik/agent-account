@@ -51,6 +51,7 @@ urlpatterns = [
         name="player-detail",
     ),
     path('player/<int:pk>/delete/', player_delete_confirm, name='player-delete'),
+    path('player/<int:pk>/update/', player_update, name='player-update'),
     path('player/create/', create_player, name='player-create'),
     path('register/', AgentRegisterView.as_view(), name='register'),
 ]

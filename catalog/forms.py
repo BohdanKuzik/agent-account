@@ -25,3 +25,7 @@ class PlayerForm(forms.ModelForm):
             'country': forms.TextInput(attrs={'class': 'form-control'}),
             'position': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class PlayerSearchForm(forms.Form):
+    last_name = forms.CharField(max_length=255, required=False)
