@@ -87,3 +87,8 @@ class AgentRegisterView(generic.CreateView):
     form_class = AgentCreationForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
+
+
+class PlayerDeleteView(generic.DeleteView):
+    model = Player
+    success_url = reverse_lazy('catalog:player-list')

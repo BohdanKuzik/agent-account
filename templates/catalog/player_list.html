@@ -17,10 +17,11 @@
           <thead class="thead-dark">
           <tr>
             <th>ID</th>
-            <th>Full name</th>
+            <th>Full Name</th>
             <th>Age</th>
             <th>Country</th>
             <th>Details</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -32,6 +33,14 @@
               <td class="align-middle">{{ player.country }}</td>
               <td class="align-middle">
                 <a href="{% url 'catalog:player-detail' pk=player.id %}" class="btn btn-info btn-sm">Detail</a>
+              </td>
+              <td class="align-middle">
+                <form action="{% url 'catalog:player-delete' pk=player.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </form>
               </td>
             </tr>
           {% endfor %}
