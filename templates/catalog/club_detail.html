@@ -2,12 +2,6 @@
 {% load static %}
 
 {% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'catalog:club-list' %}">Clubs</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Club Details</li>
-    </ol>
-  </nav>
 {% endblock breadcrumbs %}
 
 {% block content %}
@@ -15,8 +9,8 @@
     <div class="row">
       <div class="col-md-8">
         <div class="card mb-4">
-          <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Club Details: {{ club.club_name }}</h4>
+          <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0" style="color: white">Club Details: {{ club.club_name }}</h4>
           </div>
           <div class="card-body">
             <dl class="row">
