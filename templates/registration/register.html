@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
-
 {% block content %}
   <div class="container mt-4">
     <div class="card">
@@ -11,20 +10,16 @@
         <h3 class="mb-0">Register</h3>
       </div>
       <div class="card-body">
-
         {% if form.errors %}
           <div class="alert alert-danger">
             <strong>Oops!</strong> There were errors in your form. Please correct them and try again.
           </div>
         {% endif %}
-
         <form method="post" action="{% url 'catalog:register' %}">
           {% csrf_token %}
           {{ form|crispy }}
-
           <button type="submit" class="btn btn-primary mt-3">Register</button>
         </form>
-
       </div>
     </div>
   </div>

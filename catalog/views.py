@@ -114,6 +114,14 @@ class AgentRegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
+class UserProfileView(LoginRequiredMixin, generic.DetailView):
+    model = Agent
+    template_name = 'catalog/user_profile.html'
+    context_object_name = 'agent'
+
+    def get_object(self):
+        return self.request.user
+
 @login_required
 def player_delete_confirm(request, pk):
     player = get_object_or_404(Player, pk=pk)
