@@ -82,10 +82,17 @@
             </ul>
           {% else %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'login' %}"><form action="{% url 'logout' %}" method="post">
+              <li class=""><a href="{% url 'login' %}">
+                <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-primary">Log in</button>
-                </form></a></li>
+                </form>
+              </a></li>
+            </ul>
+            <ul class="pcoded-submenu">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'catalog:register' %}">Register</a>
+              </li>
             </ul>
           {% endif %}
         </li>

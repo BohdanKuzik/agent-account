@@ -1,9 +1,10 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import generic
 
+from catalog.forms import RegisterForm
 from catalog.models import (
     Agent,
     Club,
@@ -77,3 +78,15 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
 
 class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Player
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html', {'form': form})
