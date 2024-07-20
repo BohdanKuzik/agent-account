@@ -21,7 +21,7 @@
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
             class="nav-item {% if 'catalog:index' in segment %}active{% endif %}">
           <a href="{% url 'catalog:agent-list' %}" class="nav-link ">
-            <span class="pcoded-micon"><i class="feather icon-briefcase"></i></span><span class="pcoded-mtext">Our Agents</span>
+            <span class="pcoded-micon"><i class="feather icon-briefcase text-c-green"></i></span><span class="pcoded-mtext">Our Agents</span>
           </a>
         </li>
 
@@ -33,7 +33,10 @@
           <a href="{% url 'catalog:transfer-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Our Transfers</span></a>
         </li>
-
+        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+          <a href="{% url 'catalog:club-list' %}" class="nav-link "><span class="pcoded-micon"><i
+              class="feather icon-box text-c-green"></i></span><span class="pcoded-mtext">Clubs</span></a>
+        </li>
 
         {% if app_list %}
           {% for app in app_list %}

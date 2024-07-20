@@ -10,7 +10,7 @@ from catalog.views import (
     PlayerDetailView,
     AgentDetailView,
     AgentRegisterView,
-    player_delete_confirm, create_player,
+    player_delete_confirm, create_player, PlayerUpdateView, ClubDetailView,
 )
 
 urlpatterns = [
@@ -19,6 +19,11 @@ urlpatterns = [
         "clubs/",
         ClubListView.as_view(),
         name="club-list",
+    ),
+    path(
+        "clubs/<int:pk>/",
+        ClubDetailView.as_view(),
+        name="club-detail",
     ),
     path(
         "transfers/",
@@ -51,7 +56,7 @@ urlpatterns = [
         name="player-detail",
     ),
     path('player/<int:pk>/delete/', player_delete_confirm, name='player-delete'),
-    path('player/<int:pk>/update/', player_update, name='player-update'),
+    path('player/<int:pk>/update/', PlayerUpdateView.as_view(), name='player-update'),
     path('player/create/', create_player, name='player-create'),
     path('register/', AgentRegisterView.as_view(), name='register'),
 ]

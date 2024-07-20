@@ -18,8 +18,9 @@
           <th>Full Name</th>
           <th>Age</th>
           <th>Country</th>
-          <th>Details</th>
-          <th>Actions</th>
+          <th>Detail</th>
+          <th>Delete</th>
+          <th>Update</th>
         </tr>
         </thead>
         <tbody>
@@ -33,10 +34,10 @@
               <a href="{% url 'catalog:player-detail' pk=player.id %}" class="btn btn-info btn-sm">Detail</a>
             </td>
             <td class="align-middle">
-              <a href="{% url 'catalog:player-delete' pk=player.id %}" class="btn btn-danger">Delete</a>
+              <a href="{% url 'catalog:player-delete' pk=player.id %}" class="btn btn-danger btn-sm">Delete</a>
             </td>
             <td class="align-middle">
-              <a href="{% url 'catalog:player-update' pk=player.id %}" class="btn btn-danger">Delete</a>
+              <a href="{% url 'catalog:player-update' pk=player.id %}" class="btn btn-secondary btn-sm">Update</a>
             </td>
           </tr>
         {% endfor %}
@@ -48,8 +49,15 @@
       There are no players in the data.
     </div>
   {% endif %}
-  {% block pagination %}
-    {% include "includes/pagination.html" %}
-  {% endblock %}
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <div>
+      {% block pagination %}
+        {% include "includes/pagination.html" %}
+      {% endblock %}
+    </div>
+    <div>
+      <a href="{% url 'catalog:player-list' %}" class="btn btn-secondary">Back to Player List</a>
+    </div>
   </div>
 {% endblock %}

@@ -44,6 +44,10 @@ class ClubListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
 
+class ClubDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Club
+
+
 class TransferListView(LoginRequiredMixin, generic.ListView):
     model = Transfer
     paginate_by = 5
