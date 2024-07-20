@@ -8,7 +8,8 @@ from catalog.views import (
     TransferListView,
     TransferDetailView,
     PlayerDetailView,
-    AgentDetailView, register,
+    AgentDetailView,
+    AgentRegisterView,
 )
 
 urlpatterns = [
@@ -48,7 +49,7 @@ urlpatterns = [
         PlayerDetailView.as_view(),
         name="player-detail",
     ),
-    path('register/', register, name='register'),
+    path('register/', AgentRegisterView.as_view(), name='register'),
 ]
 
 app_name = "catalog"

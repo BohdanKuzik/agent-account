@@ -1,22 +1,26 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
-
 {% load static %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 {% block content %}
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-light">
           <div class="card-body text-center">
-            <h3 class="card-title">Logged Out</h3>
-            <p class="card-text">You have been successfully logged out.</p>
-            <a href="{% url 'login' %}" class="btn btn-primary">Click here to log in again</a>
+            <h3 class="card-title mb-4">Successfully Logged Out</h3>
+            <p class="card-text mb-4">You have been successfully logged out. Please choose one of the following options:</p>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg mb-2">
+              <i class="feather icon-log-in"></i> Log In
+            </a>
+            <br>
+            <a href="{% url 'catalog:register' %}" class="btn btn-primary btn-lg">
+              <i class="feather icon-user-plus"></i> Sign Up
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 {% endblock %}
-

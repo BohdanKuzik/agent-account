@@ -85,14 +85,17 @@
               <li class=""><a href="{% url 'login' %}">
                 <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-primary">Log in</button>
+                  <button type="submit" class="btn btn-secondary">Log in</button>
                 </form>
               </a></li>
             </ul>
-            <ul class="pcoded-submenu">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'catalog:register' %}">Register</a>
-              </li>
+            <ul class="pcoded-submenu"> 
+              <li class=""><a href="{% url 'login' %}">
+                <form action="{% url 'catalog:register' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+              </a></li>
             </ul>
           {% endif %}
         </li>
