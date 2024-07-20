@@ -28,12 +28,16 @@
               <div class="pro-head">
                 <img src="{% static 'assets/images/user/avatar-2.jpg' %}" class="img-radius" alt="User-Profile-Image">
                 <span>{{ request.user.username }}</span>
-                <a href="{% url 'accounts:logout' %}" class="dud-logout" title="Logout">
+                <a href="{% url 'logout' %}" class="dud-logout w-25 h-10" title="Logout">
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Log out</button>
+                  </form>
                   <i class="feather icon-log-out" style="float: right"></i>
                 </a>
               </div>
               <ul class="pro-body">
-                  <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
                 <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
               </ul>
             </div>
@@ -42,7 +46,11 @@
               <div class="pro-head">
                 <img src="{% static 'assets/images/user/avatar-2.jpg' %}" class="img-radius" alt="User-Profile-Image">
                 <span>Guest</span>
-                <a href="{% url 'accounts:login' %}" class="dud-logout" title="Login">
+                <a href="{% url 'login' %}" class="dud-logout w-25 h-10" title="Login">
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                  </form>
                   <i class="feather icon-log-in" style="float: right"></i>
                 </a>
               </div>

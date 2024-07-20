@@ -73,11 +73,19 @@
           </a>
           {% if request.user.is_authenticated %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'accounts:logout' %}" class="" target="_self">Log out</a></li>
+              <li class=""><a href="{% url 'logout' %}">
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Log out</button>
+                </form>
+              </a></li>
             </ul>
           {% else %}
             <ul class="pcoded-submenu">
-              <li class=""><a href="{% url 'accounts:login' %}" class="" target="_self">Log in</a></li>
+              <li class=""><a href="{% url 'login' %}"><form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary">Log in</button>
+                </form></a></li>
             </ul>
           {% endif %}
         </li>
