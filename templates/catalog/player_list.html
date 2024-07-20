@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
@@ -8,7 +7,7 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="mb-0">Our Players</h1>
-      <a href="#" class="btn btn-primary">Create New Player</a>
+      <a href="{% url 'catalog:player-create' %}" class="btn btn-primary">Create New Player</a>
     </div>
 
     {% if player_list %}
@@ -35,12 +34,7 @@
                 <a href="{% url 'catalog:player-detail' pk=player.id %}" class="btn btn-info btn-sm">Detail</a>
               </td>
               <td class="align-middle">
-                <form action="{% url 'catalog:player-delete' pk=player.id %}" method="post" style="display:inline;">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </form>
+                <a href="{% url 'catalog:player-delete' pk=player.id %}" class="btn btn-danger">Delete</a>
               </td>
             </tr>
           {% endfor %}

@@ -1,12 +1,11 @@
-from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 
-from catalog.forms import AgentCreationForm
+from catalog.forms import AgentCreationForm, PlayerForm
 from catalog.models import (
     Agent,
     Club,
@@ -89,6 +88,24 @@ class AgentRegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
-class PlayerDeleteView(generic.DeleteView):
-    model = Player
-    success_url = reverse_lazy('catalog:player-list')
+@login_required
+def player_delete_confirm(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+
+    if request.method == 'POST':
+        player.delete()
+        return redirect(reverse('catalog:player-list'))
+
+    return render(request, 'catalog/player_confirm_delete.html', {'player': player})
+
+@login_required
+def create_player(request):
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('catalog:player-list')
+    else:
+        form = PlayerForm()
+
+    return render(request, 'catalog/player_create.html', {'form': form})
