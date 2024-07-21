@@ -8,7 +8,6 @@ from django.shortcuts import (
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-
 from catalog.forms import (
     AgentCreationForm,
     PlayerForm,
@@ -21,11 +20,9 @@ from catalog.models import (
     Transfer,
 )
 
-
 @login_required
 def index(request):
     """View function for the home page of the site."""
-
     num_agents = Agent.objects.count()
     num_clubs = Club.objects.count()
     num_players = Player.objects.count()
@@ -44,45 +41,44 @@ def index(request):
 
     return render(request, "catalog/index.html", context=context)
 
-
 class ClubListView(LoginRequiredMixin, generic.ListView):
     model = Club
     context_object_name = "club_list"
     template_name = "catalog/club_list.html"
     paginate_by = 10
 
-
 class ClubDetailView(LoginRequiredMixin, generic.DetailView):
     model = Club
-
 
 class TransferListView(LoginRequiredMixin, generic.ListView):
     model = Transfer
     paginate_by = 5
-    queryset = Transfer.objects.all().select_related("club")
-
+    queryset = Transfer.objects.all().select_related("club").prefetch_related("agents")
 
 class TransferDetailView(LoginRequiredMixin, generic.DetailView):
     model = Transfer
 
+    def get_queryset(self):
+        return Transfer.objects.select_related("club").prefetch_related("agents")
 
 class AgentListView(LoginRequiredMixin, generic.ListView):
     model = Agent
     paginate_by = 5
-
 
 class AgentDetailView(LoginRequiredMixin, generic.DetailView):
     model = Agent
     template_name = "catalog/agent_detail.html"
     context_object_name = "agent"
 
+    def get_queryset(self):
+        return Agent.objects.prefetch_related("players", "transfers")
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         agent = self.get_object()
-        context["transfers"] = Transfer.objects.filter(agents=agent)
+        context["transfers"] = agent.transfers.all()
         context["players"] = agent.players.all()
         return context
-
 
 class PlayerListView(LoginRequiredMixin, generic.ListView):
     model = Player
@@ -97,30 +93,29 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Player.objects.all()
+        queryset = Player.objects.all().select_related('agent')
         last_name = self.request.GET.get("last_name")
         if last_name:
             queryset = queryset.filter(last_name__icontains=last_name)
         return queryset
 
-
 class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Player
 
+    def get_queryset(self):
+        return Player.objects.select_related('agent')
 
-class PlayerUpdateView(generic.UpdateView):
+class PlayerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Player
     form_class = PlayerForm
     template_name = "catalog/player_form.html"
     success_url = reverse_lazy("catalog:player-list")
-
 
 class AgentRegisterView(generic.CreateView):
     model = Agent
     form_class = AgentCreationForm
     template_name = "registration/register.html"
     success_url = reverse_lazy("login")
-
 
 class UserProfileView(LoginRequiredMixin, generic.DetailView):
     model = Agent
@@ -130,10 +125,9 @@ class UserProfileView(LoginRequiredMixin, generic.DetailView):
     def get_object(self):
         return self.request.user
 
-
 @login_required
 def player_delete_confirm(request, pk):
-    player = get_object_or_404(Player, pk=pk)
+    player = get_object_or_404(Player.objects.select_related('agent'), pk=pk)
 
     if request.method == "POST":
         player.delete()
@@ -144,7 +138,6 @@ def player_delete_confirm(request, pk):
         "catalog/player_confirm_delete.html",
         {"player": player}
     )
-
 
 @login_required
 def create_player(request):

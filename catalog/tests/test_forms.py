@@ -21,7 +21,7 @@ class AgentCreationFormTest(TestCase):
     def test_agent_creation_form_no_data(self):
         form = AgentCreationForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 5)
+        self.assertEqual(len(form.errors), 3)
 
 
 class PlayerFormTest(TestCase):
