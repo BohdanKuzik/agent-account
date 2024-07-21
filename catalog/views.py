@@ -139,7 +139,11 @@ def player_delete_confirm(request, pk):
         player.delete()
         return redirect(reverse("catalog:player-list"))
 
-    return render(request, "catalog/player_confirm_delete.html", {"player": player})
+    return render(
+        request,
+        "catalog/player_confirm_delete.html",
+        {"player": player}
+    )
 
 
 @login_required

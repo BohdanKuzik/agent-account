@@ -30,7 +30,6 @@ class Agent(AbstractUser):
         verbose_name = "agent"
         verbose_name_plural = "agents"
 
-
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
@@ -51,7 +50,10 @@ class Club(models.Model):
 
 class Transfer(models.Model):
     transfer_date = models.DateField()
-    agents = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="transfers")
+    agents = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="transfers"
+    )
     club = models.ForeignKey(
         Club,
         on_delete=models.CASCADE,
@@ -63,5 +65,5 @@ class Transfer(models.Model):
         ordering = ("transfer_date",)
 
     def __str__(self):
-        return f"Transfer on {self.transfer_date} for {self.transaction_amount} amount"
-
+        return (f"Transfer on {self.transfer_date}"
+                f" for {self.transaction_amount} amount")

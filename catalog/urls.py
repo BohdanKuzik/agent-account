@@ -59,8 +59,16 @@ urlpatterns = [
         PlayerDetailView.as_view(),
         name="player-detail",
     ),
-    path("player/<int:pk>/delete/", player_delete_confirm, name="player-delete"),
-    path("player/<int:pk>/update/", PlayerUpdateView.as_view(), name="player-update"),
+    path(
+        "player/<int:pk>/delete/",
+        player_delete_confirm,
+        name="player-delete"
+    ),
+    path(
+        "player/<int:pk>/update/",
+        PlayerUpdateView.as_view(),
+        name="player-update"
+    ),
     path("player/create/", create_player, name="player-create"),
     path("register/", AgentRegisterView.as_view(), name="register"),
     path("profile/", UserProfileView.as_view(), name="user-profile"),

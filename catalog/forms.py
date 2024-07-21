@@ -10,8 +10,12 @@ class AgentCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["password1"].widget.attrs.update({"class": "form-control", "placeholder": "Password"})
-        self.fields["password2"].widget.attrs.update({"class": "form-control", "placeholder": "Confirm Password"})
+        self.fields["password1"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Password"}
+        )
+        self.fields["password2"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Confirm Password"}
+        )
 
 
 class PlayerForm(forms.ModelForm):
