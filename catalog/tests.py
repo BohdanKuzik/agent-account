@@ -44,7 +44,7 @@ class AgentModelTest(TestCase):
             last_name="Doe",
             password="password"
         )
-        self.assertEqual(agent.get_absolute_url(), f"/catalog/agent-detail/{agent.pk}/")
+        self.assertEqual(agent.get_absolute_url(), f"/agents/{agent.pk}/")
 
 
 class ClubModelTest(TestCase):
