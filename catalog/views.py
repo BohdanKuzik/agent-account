@@ -1,11 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import (
+    render,
+    redirect,
+    get_object_or_404,
+)
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 
-from catalog.forms import AgentCreationForm, PlayerForm, PlayerSearchForm
+from catalog.forms import (
+    AgentCreationForm,
+    PlayerForm,
+    PlayerSearchForm,
+)
 from catalog.models import (
     Agent,
     Club,
@@ -65,14 +73,14 @@ class AgentListView(LoginRequiredMixin, generic.ListView):
 
 class AgentDetailView(LoginRequiredMixin, generic.DetailView):
     model = Agent
-    template_name = 'catalog/agent_detail.html'
-    context_object_name = 'agent'
+    template_name = "catalog/agent_detail.html"
+    context_object_name = "agent"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         agent = self.get_object()
-        context['transfers'] = Transfer.objects.filter(agents=agent)
-        context['players'] = agent.players.all()
+        context["transfers"] = Transfer.objects.filter(agents=agent)
+        context["players"] = agent.players.all()
         return context
 
 
@@ -103,43 +111,45 @@ class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
 class PlayerUpdateView(generic.UpdateView):
     model = Player
     form_class = PlayerForm
-    template_name = 'catalog/player_form.html'
-    success_url = reverse_lazy('catalog:player-list')
+    template_name = "catalog/player_form.html"
+    success_url = reverse_lazy("catalog:player-list")
 
 
 class AgentRegisterView(generic.CreateView):
     model = Agent
     form_class = AgentCreationForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
+    template_name = "registration/register.html"
+    success_url = reverse_lazy("login")
 
 
 class UserProfileView(LoginRequiredMixin, generic.DetailView):
     model = Agent
-    template_name = 'catalog/user_profile.html'
-    context_object_name = 'agent'
+    template_name = "catalog/user_profile.html"
+    context_object_name = "agent"
 
     def get_object(self):
         return self.request.user
+
 
 @login_required
 def player_delete_confirm(request, pk):
     player = get_object_or_404(Player, pk=pk)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         player.delete()
-        return redirect(reverse('catalog:player-list'))
+        return redirect(reverse("catalog:player-list"))
 
-    return render(request, 'catalog/player_confirm_delete.html', {'player': player})
+    return render(request, "catalog/player_confirm_delete.html", {"player": player})
+
 
 @login_required
 def create_player(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PlayerForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('catalog:player-list')
+            return redirect("catalog:player-list")
     else:
         form = PlayerForm()
 
-    return render(request, 'catalog/player_create.html', {'form': form})
+    return render(request, "catalog/player_create.html", {"form": form})

@@ -11,7 +11,7 @@ class Player(models.Model):
     country = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     agent = models.ForeignKey(
-        'Agent',
+        "Agent",
         on_delete=models.CASCADE,
         related_name="players",
         null=True,

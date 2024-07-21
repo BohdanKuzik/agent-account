@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Player, Agent, Club, Transfer
+from catalog.models import (
+    Player,
+    Agent,
+    Club,
+    Transfer,
+)
 
 
 @admin.register(Agent)
