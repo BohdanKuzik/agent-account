@@ -11,7 +11,7 @@ from catalog.models import (
 User = get_user_model()
 
 
-class ModelTests(TestCase):
+class PlayerModelTests(TestCase):
     def setUp(self):
         self.agent = Agent.objects.create(first_name="Test")
 
