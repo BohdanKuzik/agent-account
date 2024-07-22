@@ -13,7 +13,7 @@ class Command(BaseCommand):
         fake = Faker()
 
         players = []
-        for _ in range(10):
+        for _ in range(100):
             player = Player.objects.create(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
         agents = []
         User = get_user_model()
-        for _ in range(5):
+        for _ in range(20):
             agent = User.objects.create_user(
                 username=fake.user_name(),
                 first_name=fake.first_name(),
@@ -41,14 +41,14 @@ class Command(BaseCommand):
             agents.append(agent)
 
         clubs = []
-        for _ in range(5):
+        for _ in range(30):
             club = Club.objects.create(
                 club_name=fake.company(),
                 league=fake.word(),
             )
             clubs.append(club)
 
-        for _ in range(10):
+        for _ in range(100):
             transfer = Transfer.objects.create(
                 transfer_date=fake.date_between(start_date='-2y', end_date='today'),
                 club=choice(clubs),

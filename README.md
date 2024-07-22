@@ -23,7 +23,7 @@ cd agent-account
 python3 -m venv venv
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py loaddata generated_data.json
+python manage.py generator_data
 python manage.py runserver
 ```
 
@@ -31,10 +31,10 @@ After running that code you'll be able to browse the website locally on your com
 
 ### Features
 
-* Authentication functionality for Worker/User
-* Managing tasks and projects from the presented interface
-* Following tasks deadlines and assignees
-* Filtering and searching
+* Authentication functionality for Agent/User
+* Managing transfers and players from the presented interface
+* Creating, deleting and editing different data
+* Searching players in app
 * Admin panel for advanced DB management
 
 ## Demo
