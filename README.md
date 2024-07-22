@@ -10,8 +10,8 @@ Web application for football agents to view various information about players on
 
 <i>If you don't want to register you can use the following credentials:</i>
 
-* <i>Login: admin25</i>
-* <i>Password: bodya1234</i>
+* <i>Login: admin</i>
+* <i>Password: admin2509</i>
 
 ## Installing locally / Getting started
 
