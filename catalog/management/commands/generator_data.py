@@ -10,6 +10,10 @@ class Command(BaseCommand):
     help = 'Generate random data for the database'
 
     def handle(self, *args, **kwargs):
+        secret_key = os.getenv('DJANGO_SECRET_KEY')
+        if not secret_key:
+            raise RuntimeError('DJANGO_SECRET_KEY environment variable not set.')
+
         fake = Faker()
 
         players = []
