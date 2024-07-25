@@ -17,8 +17,14 @@ from catalog.views import (
     UserProfileView,
 )
 
+app_name = "catalog"
+
 urlpatterns = [
-    path("", index, name="index"),
+    path(
+        "",
+        index,
+        name="index"
+    ),
     path(
         "clubs/",
         ClubListView.as_view(),
@@ -35,7 +41,7 @@ urlpatterns = [
         name="transfer-list",
     ),
     path(
-        "transfer/<int:pk>/",
+        "transfers/<int:pk>/",
         TransferDetailView.as_view(),
         name="transfer-detail",
     ),
@@ -50,6 +56,11 @@ urlpatterns = [
         name="agent-detail",
     ),
     path(
+        "register/",
+        AgentRegisterView.as_view(),
+        name="agent-register",
+    ),
+    path(
         "players/",
         PlayerListView.as_view(),
         name="player-list",
@@ -60,18 +71,23 @@ urlpatterns = [
         name="player-detail",
     ),
     path(
-        "player/<int:pk>/delete/",
+        "players/<int:pk>/delete/",
         player_delete_confirm,
         name="player-delete"
     ),
     path(
-        "player/<int:pk>/update/",
+        "players/<int:pk>/update/",
         PlayerUpdateView.as_view(),
         name="player-update"
     ),
-    path("player/create/", create_player, name="player-create"),
-    path("register/", AgentRegisterView.as_view(), name="register"),
-    path("profile/", UserProfileView.as_view(), name="user-profile"),
+    path(
+        "players/create/",
+        create_player,
+        name="player-create"
+    ),
+    path(
+        "profile/",
+        UserProfileView.as_view(),
+        name="user-profile"
+    ),
 ]
-
-app_name = "catalog"

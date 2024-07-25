@@ -1,13 +1,21 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import (
+    login_required,
+)
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+)
 from django.shortcuts import (
     render,
     redirect,
     get_object_or_404,
 )
-from django.urls import reverse_lazy, reverse
-from django.views import generic
-
+from django.urls import (
+    reverse_lazy,
+    reverse
+)
+from django.views import(
+    generic,
+)
 
 from catalog.forms import (
     AgentCreationForm,
@@ -56,19 +64,13 @@ class ClubDetailView(LoginRequiredMixin, generic.DetailView):
     model = Club
 
 
-class TransferListView(
-    LoginRequiredMixin,
-    generic.ListView
-):
+class TransferListView(LoginRequiredMixin, generic.ListView):
     model = Transfer
     paginate_by = 5
-    queryset = Transfer.objects.all().select_related("club")
+    queryset = Transfer.objects.select_related("club")
 
 
-class TransferDetailView(
-    LoginRequiredMixin,
-    generic.DetailView
-):
+class TransferDetailView(LoginRequiredMixin, generic.DetailView):
     model = Transfer
 
 
@@ -95,7 +97,7 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 15
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(PlayerListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         last_name = self.request.GET.get("last_name", "")
         context["search_form"] = PlayerSearchForm(
             initial={"last_name": last_name}
@@ -114,7 +116,7 @@ class PlayerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Player
 
 
-class PlayerUpdateView(generic.UpdateView):
+class PlayerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Player
     form_class = PlayerForm
     template_name = "catalog/player_form.html"
@@ -162,4 +164,8 @@ def create_player(request):
     else:
         form = PlayerForm()
 
-    return render(request, "catalog/player_create.html", {"form": form})
+    return render(
+        request,
+        "catalog/player_create.html",
+        {"form": form}
+    )
