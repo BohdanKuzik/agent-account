@@ -94,7 +94,7 @@
             </ul>
             <ul class="pcoded-submenu">
               <li class=""><a href="{% url 'login' %}">
-                <form action="{% url 'catalog:register' %}" method="post">
+                <form action="{% url 'catalog:agent-register' %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-primary">Register</button>
                 </form>
