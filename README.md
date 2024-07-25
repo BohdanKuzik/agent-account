@@ -36,9 +36,9 @@ cp .env.template .env
 ```
 2) Open the .env file and fill in the required values:
 ```shell
-set DJANGO_SECRET_KEY=your_secret_key_here
-set DJANGO_DEBUG=False
-set DATABASE_URL=postgresql://agentdb_owner:w5gOuPfUj1Ex@ep-nameless-limit-a29axxol.eu-central-1.aws.neon.tech/agentdb?sslmode=require
+DJANGO_SECRET_KEY=your_secret_key_here
+DJANGO_DEBUG=False
+DATABASE_URL=postgresql://agentdb_owner:w5gOuPfUj1Ex@ep-nameless-limit-a29axxol.eu-central-1.aws.neon.tech/agentdb?sslmode=require
 ```
 Replace your_secret_key_here with a secure, randomly generated secret key. You can generate one using the following command in a Python shell:
 ```shell
