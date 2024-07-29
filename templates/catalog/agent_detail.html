@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="d-flex align-items-center mb-4">
+      <img class="rounded-circle me-3" style="width: 40px;"
+           src="{% static 'assets/images/user/avatar-2.jpg' %}"
+           alt="{{ agent.username }}'s avatar">
+      <h1 class="mb-0">&nbsp&nbsp{{ agent.username }}'s Transfers</h1>
+    </div>
+
+    <div class="card mb-4 bg-dark text-light">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="card-title mb-0" style="color: white">Agent Details</h3>
+      </div>
+      <div class="card-body">
+        <div class="list-group-item bg-dark text-light border-0">
+          <strong>Username:</strong> {{ agent.username }}<br>
+          <strong>Email:</strong> {{ agent.email }}<br>
+          <strong>Full Name:</strong> {{ agent.first_name }} {{ agent.last_name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4 bg-dark text-light">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="card-title mb-0" style="color: white">Transfers Made by This Agent</h3>
+      </div>
+      <div class="card-body">
+        {% if transfers %}
+          <ul class="list-group">
+            {% for transfer in transfers %}
+              <li class="list-group-item bg-dark text-light border-0 mb-2">
+                <strong>Transfer Date:</strong> {{ transfer.transfer_date }}<br>
+                <strong>Club:</strong> {{ transfer.club.club_name }}<br>
+                <strong>Transaction Amount:</strong> {{ transfer.transaction_amount }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No transfers found for this agent.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card bg-dark text-light">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="card-title mb-0" style="color: white">Players Contracts</h3>
+      </div>
+      <div class="card-body">
+        {% if players %}
+          <ul class="list-group">
+            {% for player in players %}
+              <li class="list-group-item bg-dark text-light border-0 mb-2">
+                <strong>Full Name:</strong> {{ player.last_name }} {{ player.first_name }}<br>
+                <strong>Club:</strong> {{ player.position }}<br>
+                <strong>Age:</strong> {{ player.age }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No players found for this agent.</p>
+        {% endif %}
+      </div>
+      <div class="card-footer bg-dark text-light">
+        <a href="{% url 'catalog:agent-list' %}" class="btn btn-secondary">Back to List</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card  mb-4 shadow-lg rounded-lg">
+          <div class="card-header bg-gradient text-white d-flex align-items-center justify-content-between" style="background: linear-gradient(135deg, #007bff, #00c6ff); border-bottom: none; padding: 1.5rem;">
+            <h5 class="mb-0">Profile Details</h5>
+          </div>
+          <div class="card-body" style="padding: 2rem;">
+            <div class="profile-header d-flex flex-column align-items-center" style="text-align: center;">
+              <div class="profile-img-wrapper mb-4" style="position: relative;">
+                <img src="{% static 'assets/images/user/avatar-2.jpg' %}" alt="Profile Image" class="profile-img rounded-circle" style="width: 150px; height: 150px; object-fit: cover; transition: transform 0.3s ease;">
+              </div>
+              <h4 class="font-weight-bold">{{ agent.username }}</h4>
+              <p class="text-muted">{{ agent.profile.bio|default:"No bio provided." }}</p>
+            </div>
+            <dl class="row">
+              <dt class="col-sm-4 font-weight-bold text-muted">Username:</dt>
+              <dd class="col-sm-8">{{ agent.username }}</dd>
+
+              <dt class="col-sm-4 font-weight-bold text-muted">First Name:</dt>
+              <dd class="col-sm-8">{{ agent.first_name }}</dd>
+
+              <dt class="col-sm-4 font-weight-bold text-muted">Last Name:</dt>
+              <dd class="col-sm-8">{{ agent.last_name }}</dd>
+
+              <dt class="col-sm-4 font-weight-bold text-muted">Email:</dt>
+              <dd class="col-sm-8">{{ agent.email }}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0" style="color: white">Club Details: {{ club.club_name }}</h4>
+          </div>
+          <div class="card-body">
+            <dl class="row">
+              <dt class="col-sm-4 font-weight-bold">Club Name:</dt>
+              <dd class="col-sm-8">{{ club.club_name }}</dd>
+
+              <dt class="col-sm-4 font-weight-bold">League:</dt>
+              <dd class="col-sm-8">{{ club.league }}</dd>
+            </dl>
+          </div>
+          <div class="card-footer text-right">
+            <a href="{% url 'catalog:club-list' %}" class="btn btn-secondary">Back to Club List</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
