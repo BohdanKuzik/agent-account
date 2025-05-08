@@ -34,3 +34,7 @@ class PlayerForm(forms.ModelForm):
 
 class PlayerSearchForm(forms.Form):
     last_name = forms.CharField(max_length=255, required=False)
+    first_name = forms.CharField(max_length=255, required=False)
+    country = forms.CharField(max_length=255, required=False)
+    position = forms.CharField(max_length=255, required=False)
+    age = forms.IntegerField(required=False)

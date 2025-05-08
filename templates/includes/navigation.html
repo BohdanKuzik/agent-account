@@ -6,12 +6,15 @@
   </a>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
-      {% if request.path == "/players/" %}
+      {% if "/players/" in request.path %}
         <li class="nav-item">
           <form class="form-inline" method="GET">
             <div class="input-group">
-              <input type="text" class="form-control" name="last_name" placeholder="Search player"
-                     aria-label="Search">
+              <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ request.GET.last_name }}">
+              <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ request.GET.first_name }}">
+              <input type="text" class="form-control" name="country" placeholder="Country" value="{{ request.GET.country }}">
+              <input type="text" class="form-control" name="age" placeholder="Age" value="{{ request.GET.age }}">
+              <input type="text" class="form-control" name="position" placeholder="Position" value="{{ request.GET.position }}">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Search</button>
               </div>
