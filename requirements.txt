@@ -8,7 +8,7 @@ django-debug-toolbar==4.4.6
 Faker==26.0.0
 gunicorn==22.0.0
 packaging==24.1
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 six==1.16.0

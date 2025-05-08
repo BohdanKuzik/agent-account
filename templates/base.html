@@ -5,7 +5,6 @@
   {% block extrahead %}{% endblock extrahead %}
 
 <body>
-
   {% block pre_loader %}
     {% include 'includes/pre-loader.html' %}
   {% endblock pre_loader %}
@@ -37,6 +36,6 @@
 
   {% include 'includes/scripts.html' %}
   {% block extra_js %}{% endblock extra_js %}
-
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
