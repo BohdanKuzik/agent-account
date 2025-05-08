@@ -2,49 +2,39 @@
   <div class="navbar-wrapper">
     <div class="navbar-brand header-logo"><img style="padding-right: 10px" src="/static/assets/images/divi.svg" alt="">
       <a href="{% url 'catalog:index' %}"><b>Account agent</b></a>
-      <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
     </div>
     <div class="navbar-content scroll-div">
       <ul class="nav pcoded-inner-navbar">
         <li class="nav-item pcoded-menu-caption">
           <label>Navigation</label>
         </li>
-
-        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
-            class="nav-item {% if 'index' in segment %}active{% endif %}">
+        <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
           <a href="{% url 'catalog:index' %}" class="nav-link ">
             <span class="pcoded-micon"><i class="feather icon-home"></i></span><span
               class="pcoded-mtext">What we have</span>
           </a>
         </li>
-
-        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
-            class="nav-item {% if 'catalog:index' in segment %}active{% endif %}">
+        <li class="nav-item {% if '/agents/' in request.path %}active{% endif %}">
           <a href="{% url 'catalog:agent-list' %}" class="nav-link ">
             <span class="pcoded-micon"><i class="feather icon-briefcase text-c-green"></i></span><span class="pcoded-mtext">Our Agents</span>
           </a>
         </li>
-
-        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+        <li class="nav-item {% if '/players/' in request.path %}active{% endif %}">
           <a href="{% url 'catalog:player-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Players Base</span></a>
         </li>
-        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+        <li class="nav-item {% if '/transfers/' in request.path %}active{% endif %}">
           <a href="{% url 'catalog:transfer-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Our Transfers</span></a>
         </li>
-        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+        <li class="nav-item {% if '/clubs/' in request.path %}active{% endif %}">
           <a href="{% url 'catalog:club-list' %}" class="nav-link "><span class="pcoded-micon"><i
               class="feather icon-box text-c-green"></i></span><span class="pcoded-mtext">Clubs</span></a>
         </li>
-
         {% if app_list %}
           {% for app in app_list %}
             {% if app.has_perms and not app.pinned %}
-              <li
-                  data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
-                  class="nav-item pcoded-hasmenu"
-              >
+              <li class="nav-item pcoded-hasmenu">
                 <a href="javascript:" class="nav-link ">
                   <span class="pcoded-micon"><i
                       class=" {% if app.icon %}{{ app.icon }} {% else %} feather icon-box {% endif %}"></i></span>
@@ -67,9 +57,7 @@
             {% endif %}
           {% endfor %}
         {% endif %}
-        <li
-            data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
-            class="nav-item pcoded-hasmenu">
+        <li class="nav-item pcoded-hasmenu">
           <a href="javascript:" class="nav-link">
             <span class="pcoded-micon"><i class="feather icon-lock"></i></span>
             <span class="pcoded-mtext">Authentication</span>
