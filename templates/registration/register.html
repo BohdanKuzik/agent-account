@@ -15,7 +15,7 @@
             <strong>Oops!</strong> There were errors in your form. Please correct them and try again.
           </div>
         {% endif %}
-        <form method="post" action="{% url 'catalog:register' %}">
+        <form method="post" action="{% url 'catalog:agent-register' %}">
           {% csrf_token %}
           {{ form|crispy }}
           <button type="submit" class="btn btn-primary mt-3">Register</button>
