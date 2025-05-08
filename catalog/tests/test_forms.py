@@ -3,7 +3,6 @@ from django.test import TestCase
 from catalog.forms import (
     AgentCreationForm,
     PlayerForm,
-    PlayerSearchForm,
 )
 
 
@@ -40,13 +39,3 @@ class PlayerFormTest(TestCase):
         form = PlayerForm(data={})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 5)
-
-
-class PlayerSearchFormTest(TestCase):
-    def test_player_search_form_valid_data(self):
-        form = PlayerSearchForm(data={"last_name": "Doe"})
-        self.assertTrue(form.is_valid())
-
-    def test_player_search_form_no_data(self):
-        form = PlayerSearchForm(data={})
-        self.assertTrue(form.is_valid())

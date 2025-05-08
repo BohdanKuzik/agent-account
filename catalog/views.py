@@ -19,8 +19,7 @@ from django.views import(
 
 from catalog.forms import (
     AgentCreationForm,
-    PlayerForm,
-    PlayerSearchForm,
+    PlayerForm, PlayerSearchForm,
 )
 from catalog.models import (
     Agent,
@@ -98,17 +97,30 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        last_name = self.request.GET.get("last_name", "")
         context["search_form"] = PlayerSearchForm(
-            initial={"last_name": last_name}
+            data=self.request.GET
         )
         return context
 
     def get_queryset(self):
         queryset = Player.objects.all()
-        last_name = self.request.GET.get("last_name")
-        if last_name:
-            queryset = queryset.filter(last_name__icontains=last_name)
+        sort = self.request.GET.get("sort", "")
+        if sort in ["id", "last_name", "age", "country"]:
+            queryset.order_by(sort)
+
+        form = PlayerSearchForm(self.request.GET)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get("last_name"):
+                queryset = queryset.filter(last_name__icontains=data["last_name"])
+            if data.get("first_name"):
+                queryset = queryset.filter(first_name__icontains=data["first_name"])
+            if data.get("country"):
+                queryset = queryset.filter(country__icontains=data["country"])
+            if data.get("age"):
+                queryset = queryset.filter(age=data["age"])
+            if data.get("position"):
+                queryset = queryset.filter(position__icontains=data["position"])
         return queryset
 
 
