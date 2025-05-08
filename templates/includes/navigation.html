@@ -1,9 +1,13 @@
 {% load static %}
 
 <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+  <div class="m-header">
+    <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+  </div>
   <a class="mobile-menu" id="mobile-header" href="javascript:">
     <i class="feather icon-more-horizontal"></i>
   </a>
+  <h3 style="margin-left: 40px"><a href="{% url 'catalog:index' %}"><b>Account agent</b></a></h3>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
       {% if "/players/" in request.path %}
