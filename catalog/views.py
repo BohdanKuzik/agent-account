@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import (
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
 )
+from django.db import transaction
 from django.shortcuts import (
     render,
     redirect,
@@ -19,7 +20,7 @@ from django.views import(
 
 from catalog.forms import (
     AgentCreationForm,
-    PlayerForm, PlayerSearchForm,
+    PlayerForm, PlayerSearchForm, TransferCreationForm,
 )
 from catalog.models import (
     Agent,
@@ -41,12 +42,16 @@ def index(request):
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
 
+
+    last_transfers = Transfer.objects.all().order_by("-id")[:5]
+
     context = {
         "num_agents": num_agents,
         "num_clubs": num_clubs,
         "num_players": num_players,
         "num_transfers": num_transfers,
         "num_visits": num_visits + 1,
+        "last_transfers": last_transfers,
     }
 
     return render(request, "catalog/index.html", context=context)
@@ -69,6 +74,21 @@ class TransferListView(LoginRequiredMixin, generic.ListView):
     queryset = Transfer.objects.select_related("club")
 
 
+class TransferCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Transfer
+    form_class = TransferCreationForm
+    success_url = reverse_lazy("catalog:transfer-list")
+
+    def form_valid(self, form):
+        with transaction.atomic():
+            response = super().form_valid(form)
+            player = self.object.player
+            player.club = self.object.club
+            player.save(update_fields=["club"])
+        return response
+
+
+
 class TransferDetailView(LoginRequiredMixin, generic.DetailView):
     model = Transfer
 
@@ -86,7 +106,7 @@ class AgentDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         agent = self.get_object()
-        context["transfers"] = Transfer.objects.filter(agents=agent)
+        context["transfers"] = Transfer.objects.filter(agent=agent)
         context["players"] = agent.players.all()
         return context
 
@@ -106,7 +126,7 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
         queryset = Player.objects.all()
         sort = self.request.GET.get("sort", "")
         if sort in ["id", "last_name", "age", "country"]:
-            queryset.order_by(sort)
+            queryset = queryset.order_by(sort)
 
         form = PlayerSearchForm(self.request.GET)
         if form.is_valid():
@@ -120,7 +140,7 @@ class PlayerListView(LoginRequiredMixin, generic.ListView):
             if data.get("age"):
                 queryset = queryset.filter(age=data["age"])
             if data.get("position"):
-                queryset = queryset.filter(position__icontains=data["position"])
+                queryset = queryset.filter(position=data["position"])
         return queryset
 
 

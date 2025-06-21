@@ -14,7 +14,7 @@ from catalog.views import (
     create_player,
     PlayerUpdateView,
     ClubDetailView,
-    UserProfileView,
+    UserProfileView, TransferCreateView,
 )
 
 app_name = "catalog"
@@ -44,6 +44,11 @@ urlpatterns = [
         "transfers/<int:pk>/",
         TransferDetailView.as_view(),
         name="transfer-detail",
+    ),
+    path(
+        "transfers/create/",
+        TransferCreateView.as_view(),
+        name="transfer-create",
     ),
     path(
         "agents/",

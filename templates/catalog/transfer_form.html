@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Add Transfer</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="form-horizontal">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{% url 'catalog:transfer-list' %}" class="btn btn-secondary">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

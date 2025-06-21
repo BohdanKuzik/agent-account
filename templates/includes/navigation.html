@@ -1,13 +1,13 @@
 {% load static %}
 
-<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+<header class="navbar pcoded-header navbar-expand-lg navbar-light" style="background-color: #2A374B;">
   <div class="m-header">
     <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
   </div>
   <a class="mobile-menu" id="mobile-header" href="javascript:">
     <i class="feather icon-more-horizontal"></i>
   </a>
-  <h3 style="margin-left: 40px"><a href="{% url 'catalog:index' %}"><b>Account agent</b></a></h3>
+  <h3 style="margin-left: 40px;"><a href="{% url 'catalog:index' %}"><b>Account agent</b></a></h3>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
       {% if "/players/" in request.path %}
@@ -18,7 +18,13 @@
               <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ request.GET.first_name }}">
               <input type="text" class="form-control" name="country" placeholder="Country" value="{{ request.GET.country }}">
               <input type="text" class="form-control" name="age" placeholder="Age" value="{{ request.GET.age }}">
-              <input type="text" class="form-control" name="position" placeholder="Position" value="{{ request.GET.position }}">
+              <select class="form-control" name="position">
+                  <option value="">All Positions</option>
+                  <option value="GK" {% if request.GET.position == "GK" %}selected{% endif %}>Goalkeeper</option>
+                  <option value="DF" {% if request.GET.position == "DF" %}selected{% endif %}>Defender</option>
+                  <option value="MD" {% if request.GET.position == "MD" %}selected{% endif %}>Midfielder</option>
+                  <option value="ST" {% if request.GET.position == "ST" %}selected{% endif %}>Striker</option>
+              </select>
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Search</button>
               </div>

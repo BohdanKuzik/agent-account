@@ -5,17 +5,31 @@ from django.urls import reverse
 
 
 class Player(models.Model):
+
+    class Position(models.TextChoices):
+        GK = "GK", "Goalkeeper"
+        DF = "DF", "Defender"
+        MD = "MD", "Midfielder"
+        ST =  "ST", "Striker"
+
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    age = models.IntegerField()
+    age = models.PositiveSmallIntegerField()
     country = models.CharField(max_length=255)
-    position = models.CharField(max_length=255)
+    position = models.CharField(max_length=20, choices=Position.choices)
     agent = models.ForeignKey(
         "Agent",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="players",
         null=True,
         blank=True
+    )
+    club = models.ForeignKey(
+        "Club",
+        on_delete=models.SET_NULL,
+        related_name="players",
+        null=True,
+        blank=True,
     )
 
     class Meta:
@@ -49,20 +63,28 @@ class Club(models.Model):
 
 
 class Transfer(models.Model):
-    transfer_date = models.DateField()
-    agents = models.ManyToManyField(
+    transfer_date = models.DateField(auto_now_add=True)
+    agent = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name="transfers"
+        on_delete=models.CASCADE,
+        related_name="agent_transfers",
+        null=True,
+        blank=True
     )
     club = models.ForeignKey(
         Club,
         on_delete=models.CASCADE,
-        related_name="transfers"
+        related_name="club_transfers"
     )
     transaction_amount = models.IntegerField()
+    player = models.ForeignKey(
+        Player,
+        on_delete=models.CASCADE,
+        related_name="player_transfers",
+    )
 
     class Meta:
-        ordering = ("transfer_date",)
+        ordering = ("-transfer_date",)
 
     def __str__(self):
         return (f"Transfer on {self.transfer_date}"

@@ -8,7 +8,6 @@
     <h1 class="mb-0">Our Players</h1>
     <a href="{% url 'catalog:player-create' %}" class="btn btn-primary">Create New Player</a>
   </div>
-
   {% if player_list %}
     <div class="table-responsive">
       <table class="table table-striped table-hover">
@@ -16,6 +15,8 @@
         <tr>
           <th><a href="?sort=id">ID</a></th>
           <th><a href="?sort=last_name">Full Name</a></th>
+          <th><a href="?sort=age">Club</a></th>
+          <th><a href="?sort=age">Position</a></th>
           <th><a href="?sort=age">Age</a></th>
           <th><a href="?sort=country">Country</a></th>
           <th>Detail</th>
@@ -28,6 +29,8 @@
           <tr>
             <td class="align-middle">{{ player.id }}</td>
             <td class="align-middle">{{ player.last_name }} {{ player.first_name }}</td>
+            <td class="align-middle">{{ player.club }}</td>
+            <td class="align-middle">{{ player.position }}</td>
             <td class="align-middle">{{ player.age }}</td>
             <td class="align-middle">{{ player.country }}</td>
             <td class="align-middle">
@@ -49,15 +52,11 @@
       There are no players in the data.
     </div>
   {% endif %}
-
   <div class="d-flex justify-content-between align-items-center mt-4">
     <div>
       {% block pagination %}
         {% include "includes/pagination.html" %}
       {% endblock %}
-    </div>
-    <div>
-      <a href="{% url 'catalog:player-list' %}" class="btn btn-secondary">Back to Player List</a>
     </div>
   </div>
 {% endblock %}

@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load humanize %}
+
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
 {% block content %}
@@ -14,27 +16,18 @@
       </div>
       <div class="card-body">
         <p><strong>Clubs:</strong> {{ transfer.club.club_name }}</p>
-        <p><strong>Transaction Amount:</strong> {{ transfer.transaction_amount }}</p>
-
-        <h4 class="mt-4">Agents Involved</h4>
+        <p><strong>Transaction Amount:</strong> {{ transfer.transaction_amount|floatformat:0|intcomma }}</p>
+        <h4 class="mt-4">Agent Involved</h4>
         <hr>
-        {% if transfer.agents.all %}
+        {% if transfer.agent %}
           <ul class="list-group">
-            {% for agent in transfer.agents.all %}
-              <li class="list-group-item card-header bg-secondary text-white">
-                <div class="d-flex justify-content-between align-items-center">
+              <li class="list-group-item bg-secondary text-white">
                   <div>
-                    <h5 class="mb-1" style="color: white">{{ agent.first_name }} {{ agent.last_name }}</h5>
-                    <p class="mb-1"><strong>Email:</strong> {{ agent.email }}</p>
-                    <p class="mb-1"><strong>Players:</strong>
-                      {% for player in agent.players.all %}
-                        {{ player.last_name }}{% if not forloop.last %}, {% endif %}
-                      {% endfor %}
-                    </p>
+                    <h5 class="mb-1" style="color: white">{{ transfer.agent.first_name }} {{ transfer.agent.last_name }}</h5>
+                    <p class="mb-1"><strong>Email:</strong> {{ transfer.agent.email }}</p>
+                    <p class="mb-1"><strong>Player:</strong> {{ transfer.player.first_name }}, {{ transfer.player.last_name }}</p>
                   </div>
-                </div>
               </li>
-            {% endfor %}
           </ul>
         {% else %}
           <p class="text-muted">No agents involved in this transfer.</p>

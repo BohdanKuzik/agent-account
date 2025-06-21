@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load humanize %}
+
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
 {% block content %}
@@ -12,7 +14,6 @@
            alt="{{ agent.username }}'s avatar">
       <h1 class="mb-0">&nbsp&nbsp{{ agent.username }}'s Transfers</h1>
     </div>
-
     <div class="card mb-4 bg-dark text-light">
       <div class="card-header bg-secondary text-white">
         <h3 class="card-title mb-0" style="color: white">Agent Details</h3>
@@ -25,7 +26,6 @@
         </div>
       </div>
     </div>
-
     <div class="card mb-4 bg-dark text-light">
       <div class="card-header bg-secondary text-white">
         <h3 class="card-title mb-0" style="color: white">Transfers Made by This Agent</h3>
@@ -37,7 +37,7 @@
               <li class="list-group-item bg-dark text-light border-0 mb-2">
                 <strong>Transfer Date:</strong> {{ transfer.transfer_date }}<br>
                 <strong>Club:</strong> {{ transfer.club.club_name }}<br>
-                <strong>Transaction Amount:</strong> {{ transfer.transaction_amount }}
+                <strong>Transaction Amount:</strong> {{ transfer.transaction_amount|floatformat:0|intcomma  }}
               </li>
             {% endfor %}
           </ul>
@@ -46,7 +46,6 @@
         {% endif %}
       </div>
     </div>
-
     <div class="card bg-dark text-light">
       <div class="card-header bg-secondary text-white">
         <h3 class="card-title mb-0" style="color: white">Players Contracts</h3>
@@ -57,7 +56,7 @@
             {% for player in players %}
               <li class="list-group-item bg-dark text-light border-0 mb-2">
                 <strong>Full Name:</strong> {{ player.last_name }} {{ player.first_name }}<br>
-                <strong>Club:</strong> {{ player.position }}<br>
+                <strong>Club:</strong> {{ player.club }}<br>
                 <strong>Age:</strong> {{ player.age }}
               </li>
             {% endfor %}
@@ -71,7 +70,6 @@
       </div>
     </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
